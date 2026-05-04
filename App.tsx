@@ -6,7 +6,7 @@ import { PromptOutput } from './components/PromptOutput';
 import { SUBJECT_OPTIONS, SCENE_OPTIONS, TECHNICAL_OPTIONS, DETAILS_OPTIONS } from './constants';
 import type { FormState } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Info } from 'lucide-react';
+import { Aperture, Info } from 'lucide-react';
 
 const App: React.FC = () => {
   const [formState, setFormState] = useState<FormState>({
@@ -49,12 +49,34 @@ const App: React.FC = () => {
   }, [formState]);
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-200 p-4 md:p-8 flex items-center justify-center font-sans selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-[#020617] text-slate-200 p-4 md:p-8 flex items-center justify-center font-sans selection:bg-indigo-500/30 relative overflow-hidden">
+      {/* Background Architectural Elements - Mimicking the uploaded image silhouette */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Left Pillar */}
+        <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-black/80 blur-sm" />
+        {/* Right Pillar */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/4 bg-black/80 blur-sm" />
+        {/* Bottom Silhouette */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-black/90 blur-md" />
+        {/* Central Glow */}
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-1/2 h-full bg-indigo-500/5 rounded-full blur-[120px] mix-blend-screen" />
+        
+        {/* Abstract Texture Layer */}
+        <div 
+          className="absolute inset-0 opacity-20 mix-blend-overlay grayscale"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=2070&auto=format&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="container mx-auto max-w-4xl"
+        className="container mx-auto max-w-4xl relative z-10"
       >
         <div className="bg-[#1e293b] rounded-2xl p-6 md:p-10 shadow-2xl shadow-indigo-950/20 border border-slate-700/50 backdrop-blur-sm">
           <header className="mb-10 text-center relative">
@@ -64,12 +86,12 @@ const App: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="inline-block p-3 rounded-2xl bg-indigo-500/10 mb-4 border border-indigo-500/20"
             >
-              <Sparkles className="w-8 h-8 text-indigo-400" />
+              <Aperture className="w-8 h-8 text-indigo-400" />
             </motion.div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-indigo-100 to-indigo-300">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-indigo-100 to-indigo-300 font-playwrite">
               Visual Prompt Architect
             </h1>
-            <p className="text-slate-400 max-w-lg mx-auto text-lg leading-relaxed">
+            <p className="text-slate-400 max-w-lg mx-auto text-lg leading-relaxed font-playwrite">
               Transform your basic ideas into cinematic masterpieces with precision-engineered prompt construction.
             </p>
           </header>
